@@ -49,3 +49,13 @@ void Blob::print(string str)
 	}
 
 }
+
+cube& Blob::operator[] (int i)
+{
+	return blob_data[i];
+}
+
+vector<cube>& Blob::get_data()
+{
+	return blob_data;
+}

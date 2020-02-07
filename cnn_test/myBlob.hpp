@@ -22,13 +22,15 @@ public:
 	Blob(const int n, const int c, const int h, const int w,int type = TDEFAULT);
 	void _init(const int n, const int c, const int h, const int w,int type = TDEFAULT);
 	void print(string str = "");
+	cube& operator[] (int i);
+	vector<cube>& get_data();
 private:
 	int N_;
 	int C_;
 	int H_;
 	int W_;
 	//一个blob中含有N个cube,拥有的cube的数目是动态的
-	vector<cube> blob_data;
+	vector<cube>  blob_data;
 	
 };
 
