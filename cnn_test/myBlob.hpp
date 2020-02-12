@@ -24,6 +24,7 @@ public:
 	void print(string str = "");
 	cube& operator[] (int i);
 	vector<cube>& get_data();
+	Blob subBlob(int low_idx, int high_idx);
 private:
 	int N_;
 	int C_;

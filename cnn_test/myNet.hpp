@@ -4,10 +4,14 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <memory>
+#include "myBlob.hpp"
 
 using std::unordered_map;
 using std::vector;
 using std::string;
+using std::shared_ptr;
+
 
 struct NetParam
 {
@@ -45,6 +49,28 @@ struct NetParam
 	unordered_map<string, Param> lparams;
 	void readNetParam(string file);
 };
+
+class Net
+{
+public:
+	void initNet(NetParam& param, vector < shared_ptr<Blob>>& X, vector<shared_ptr<Blob>>& Y);
+private:
+	//训练集
+	shared_ptr<Blob> X_train;
+	shared_ptr<Blob> Y_train;
+	//验证集
+	shared_ptr<Blob> X_val;
+	shared_ptr<Blob> Y_val;
+
+	vector<string> layers;
+	vector<string> ltyple;
+	
+	unordered_map<string, vector<shared_ptr<Blob>>> data;
+	unordered_map<string, vector<shared_ptr<Blob>>> diff;
+};
+
+
+
 
 
 #endif

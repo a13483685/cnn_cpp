@@ -99,28 +99,51 @@ void ReadMnistLabel(string path, shared_ptr<Blob> &labels)
 	}
 }
 
-int main(int argc, char** argv)
+void trainModel(string configFile,shared_ptr<Blob> X,shared_ptr<Blob> Y)
 {
-	string configFile = "./myModel.json";
 	NetParam net_param;
 	net_param.readNetParam(configFile);
 	cout << "learning rate = " << net_param.lr << endl;
 	cout << "batch size = " << net_param.batch_size << endl;
-	vector<string> layers_ =  net_param.layers;
+	vector<string> layers_ = net_param.layers;
 	vector<string> ltypes_ = net_param.ltype;
 	for (int i = 0; i < layers_.size(); ++i)
 	{
 		cout << "layer = " << layers_[i] << ";" << "ltype = " << ltypes_[i] << endl;
 	}
-	Blob test_blob(2, 3, 5, 5, TRANDN);
-	test_blob.print("Blob 里面的数据是：\n");
+	//将60000张图片以59:1的比例划分为训练集（59000）和验证集（1000）
+	//这部分的语法需要注意
+	shared_ptr<Blob> X_train(new Blob(X->subBlob(0, 59000)));
+	shared_ptr<Blob> Y_train(new Blob(Y->subBlob(0, 59000)));
+	shared_ptr<Blob> X_val(new Blob(X->subBlob(59000, 60000)));
+	shared_ptr<Blob> Y_val(new Blob(Y->subBlob(59000, 60000)));
+
+	vector<shared_ptr<Blob>> XX{ X_train, X_val };
+	vector<shared_ptr<Blob>> YY{ Y_train, Y_val };
+
+
+
+
+}
+
+int main(int argc, char** argv)
+{
 	
+	//Blob test_blob(2, 3, 5, 5, TRANDN);
+	//test_blob.print("Blob 里面的数据是：\n");
 	
-	
+
 	shared_ptr<Blob> images(new Blob(60000, 1, 28, 28, TZERO));
 	shared_ptr<Blob> labels(new Blob(60000, 10, 1, 1, TZERO));
+	
+	
+
 	ReadMnistData("train/train-images.idx3-ubyte",images);
 	ReadMnistLabel("train/train-labels.idx1-ubyte", labels);
+	trainModel("./myModel.json", images, labels);
+
+	//new Blob();
+	/*
 	vector<cube>& list0 = images->get_data();
 	vector<cube>& list1 = labels->get_data();
 	
@@ -128,7 +151,7 @@ int main(int argc, char** argv)
 	{
 		list0[i].print("images：");
 		list1[i].print("labels：");
-	}
+	}*/
 
 	
 	system("pause");
