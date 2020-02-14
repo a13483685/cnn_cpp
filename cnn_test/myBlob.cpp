@@ -47,7 +47,7 @@ void Blob::_init(const int n, const int c, const int h, const int w, int type)
 }
 void Blob::print(string str)
 {
-	assert(!blob_data.empty());
+	//assert(!blob_data.empty());
 	cout << str << endl;
 	for (int i = 0; i < N_; ++i)
 	{
@@ -59,6 +59,15 @@ void Blob::print(string str)
 cube& Blob::operator[] (int i)
 {
 	return blob_data[i];
+}
+
+Blob Blob::operator *=(double rate)
+{
+	for (int i = 0; i < blob_data.size(); ++i)
+	{
+		blob_data[i] *= rate;
+	}
+	return *this;
 }
 
 vector<cube>& Blob::get_data()

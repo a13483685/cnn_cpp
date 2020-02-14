@@ -56,20 +56,20 @@ public:
 	void initNet(NetParam& param, vector < shared_ptr<Blob>>& X, vector<shared_ptr<Blob>>& Y);
 private:
 	//训练集
-	shared_ptr<Blob> X_train;
-	shared_ptr<Blob> Y_train;
+	shared_ptr<Blob> X_train_;
+	shared_ptr<Blob> Y_train_;
 	//验证集
-	shared_ptr<Blob> X_val;
-	shared_ptr<Blob> Y_val;
+	shared_ptr<Blob> X_val_;
+	shared_ptr<Blob> Y_val_;
 
-	vector<string> layers;
-	vector<string> ltyple;
+	vector<string> layers_;//层名
+	vector<string> ltypes_;//层类型
 	
-	unordered_map<string, vector<shared_ptr<Blob>>> data;
-	unordered_map<string, vector<shared_ptr<Blob>>> diff;
+	unordered_map<string, vector<shared_ptr<Blob>>> data_;//用来存储正向运算的数据
+	unordered_map<string, vector<shared_ptr<Blob>>> diff_;//用来存储反向运算的数据
+	unordered_map<string, vector<int>> outShape_;
+	unordered_map<string, shared_ptr<Layer>> myLayers_;
 };
-
-
 
 
 

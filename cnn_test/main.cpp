@@ -121,6 +121,9 @@ void trainModel(string configFile,shared_ptr<Blob> X,shared_ptr<Blob> Y)
 	vector<shared_ptr<Blob>> XX{ X_train, X_val };
 	vector<shared_ptr<Blob>> YY{ Y_train, Y_val };
 
+	//³õÊ¼»¯ÍøÂç
+	Net myMode;
+	myMode.initNet(net_param,XX,YY);
 
 
 
@@ -141,6 +144,9 @@ int main(int argc, char** argv)
 	ReadMnistData("train/train-images.idx3-ubyte",images);
 	ReadMnistLabel("train/train-labels.idx1-ubyte", labels);
 	trainModel("./myModel.json", images, labels);
+
+
+	
 
 	//new Blob();
 	/*

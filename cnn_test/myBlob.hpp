@@ -23,8 +23,22 @@ public:
 	void _init(const int n, const int c, const int h, const int w,int type = TDEFAULT);
 	void print(string str = "");
 	cube& operator[] (int i);
+	Blob operator *=(double rate);
 	vector<cube>& get_data();
 	Blob subBlob(int low_idx, int high_idx);
+	inline int get_C() const 
+	{
+		return C_;
+	}
+	inline int get_W() const
+	{
+		return W_;
+	}
+	inline int get_H() const
+	{
+		return H_;
+	}
+
 private:
 	int N_;
 	int C_;
